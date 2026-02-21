@@ -4,7 +4,7 @@ var lkey = keyboard_check(vk_left) || keyboard_check(ord("A"));
 var jkey = keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("W"));
 image_xscale = dir;
 
-if (place_meeting(x, y+1, obj_Solid)) {
+if (place_meeting(x, y + 1, obj_Solid)) {
     airjump = 1
     vspd = 0;
     
@@ -75,3 +75,20 @@ __view_set( e__VW.YView, 0, clamp(__view_get( e__VW.YView, 0 ), 0, room_height-_
 __background_set( e__BG.X, 0, __view_get( e__VW.XView, 0 ) );
 __background_set( e__BG.Y, 0, __view_get( e__VW.YView, 0 ) );
 
+if(keyboard_check(vk_control))
+{
+	spd = 3
+	sprite_index = spr_viking_run
+}else{
+	spd = 2
+}
+
+if(rkey or lkey)
+{
+	sprite_index = spr_viking_walking
+}
+
+if(!lkey or !rkey)
+{
+	sprite_index = spr_viking
+}

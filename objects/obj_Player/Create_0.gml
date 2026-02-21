@@ -1,5 +1,5 @@
 /// @description Variables
-spd = 3; 
+spd = 2; 
 jspd = 6; 
 hspd = 0; 
 vspd = 0; 
