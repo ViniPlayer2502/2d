@@ -6,5 +6,7 @@ vspd = 0;
 airjump = 1; 
 dir = 1;
 
+state = player_states_free
+
 
 
