@@ -1,9 +1,0 @@
-if(rkey or lkey)
-{
-	sprite_index = spr_player_walking
-}
-
-if(!lkey or !rkey)
-{
-	sprite_index = spr_player
-}

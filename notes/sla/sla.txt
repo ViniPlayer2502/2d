@@ -1,0 +1,24 @@
+if(rkey or lkey)
+{
+	sprite_index = spr_player_walking
+}
+
+if(!lkey or !rkey)
+{
+	sprite_index = spr_player
+}
+
+
+
+
+
+
+			if(place_meeting(x,y,obj_Solid))
+				{
+					state = "free"
+					image_index = 0;
+				}
+			if(mouse_check_button(mb_left)){
+					state = "atk"
+					image_index = 0;
+				}
