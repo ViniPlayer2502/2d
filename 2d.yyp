@@ -344,6 +344,7 @@
     {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},},
     {"id":{"name":"spr_porta","path":"sprites/spr_porta/spr_porta.yy",},},
     {"id":{"name":"spr_slime","path":"sprites/spr_slime/spr_slime.yy",},},
+    {"id":{"name":"Sprite233","path":"sprites/Sprite233/Sprite233.yy",},},
     {"id":{"name":"Start__Idle_","path":"sprites/Start__Idle_/Start__Idle_.yy",},},
     {"id":{"name":"Start__Moving___64x64_","path":"sprites/Start__Moving___64x64_/Start__Moving___64x64_.yy",},},
     {"id":{"name":"Strawberry","path":"sprites/Strawberry/Strawberry.yy",},},
