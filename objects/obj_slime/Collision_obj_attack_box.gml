@@ -1,3 +1,6 @@
+// Inherit the parent event
+event_inherited();
+
 var damage = global.damage
 // Evento de colisão no slime
 hp -= damage; // Subtrai o dano

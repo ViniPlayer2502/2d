@@ -1,9 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_solid_bau",
+  "%Name":"obj_next",
   "eventList":[],
   "managed":true,
-  "name":"obj_solid_bau",
+  "name":"obj_next",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -28,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sp_Solid",
-    "path":"sprites/sp_Solid/sp_Solid.yy",
+    "name":"spr_next",
+    "path":"sprites/spr_next/spr_next.yy",
   },
   "spriteMaskId":null,
   "visible":true,

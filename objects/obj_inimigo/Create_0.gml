@@ -1,1 +1,1 @@
-hp = 100; // Defina a vida inicial do slime
+hp = 20; // Defina a vida inicial do slime

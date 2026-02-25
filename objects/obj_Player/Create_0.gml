@@ -7,7 +7,12 @@ vspd_min = -7;
 airjump = 1; 
 dir = 1;
 
-attack = false;
+meio_do_ataque = false
+meio_do_pulo = false
+
+inventory = ds_list_create();
+
+chave = 0;
 
 
 

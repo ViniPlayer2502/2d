@@ -5,32 +5,73 @@ var lkey = keyboard_check(vk_left) || keyboard_check(ord("A"));
 var jkey = keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("W"));
 var akey = mouse_check_button(mb_left)
 
-var movendo = jkey or akey or rkey or lkey;
-
-var ground = place_meeting(x, y + 1, obj_Solid)
+var ground = place_meeting(x, y + 1, obj_solid)
 
 image_xscale = dir;
 #endregion
 
 #region Movimentação
 
+#region Interagir
+
+if(keyboard_check(ord("E")))
+{
+	if(place_meeting(x,y,obj_chest))
+	{
+		chave++;
+		show_message("+1 Chave")
+	}
+	instance_destroy(obj_chest)
+}
+
+#endregion
+
 #region Parado
 
 // 1. Detecta se o jogador PAROU de apertar as teclas de movimento agora
-var parou_de_andar = !movendo; 
 
-if (parou_de_andar) {
-    // Só ativa o alarme se ele já não estiver rodando (valor -1 significa parado)
-    if (alarm[0] == -1) {
-        alarm[0] = game_get_speed(gamespeed_fps) * 1; 
+
+// Se estiver usando o sprite de ataque
+if (sprite_index == spr_player_attack)
+{
+	meio_do_ataque = true
+    // Se chegou no último frame
+    if (image_index >= image_number - 1)
+    {
+        // troca para o sprite parado
+        sprite_index = spr_player;
+        
+		meio_do_ataque = false
+		
+        // reinicia a animação
+        image_index = 0;
     }
 }
 
-// 2. Se ele voltar a andar cancelamos a contagem para ele não mudar de sprite do nada
-if (movendo) {
-    alarm[0] = -1; // Cancela o timer
-    sprite_index = spr_player_walking; // Garante que volta pro sprite normal
+if(!jkey and !rkey and !lkey and !akey and meio_do_ataque == false and meio_do_pulo == false )
+{
+	sprite_index = spr_player
+	meio_do_ataque = false
+	meio_do_pulo = false
 }
+
+if (sprite_index == spr_player_jump)
+{
+	meio_do_pulo = true
+    // Se chegou no último frame
+    if (image_index >= image_number - 1)
+    {
+        // troca para o sprite parado
+        sprite_index = spr_player;
+        
+		meio_do_pulo = false
+		
+        // reinicia a animação
+        image_index = 0;
+    }
+}
+
+
 
 #endregion
 
@@ -40,7 +81,7 @@ if (akey) {
         image_index = 0;
         sprite_index = spr_player_attack;
         global.ataque_dir = dir;
-        var attack = instance_create_layer(x + (dir * 40), y, "Instances", obj_attack_box);
+        var attack = instance_create_layer(x + (dir * 1), y, "Instances", obj_attack_box);
         attack.offset = 40;
         attack.dir = dir;
         global.ataque_criado = true; // Marca que já criou
@@ -60,6 +101,7 @@ if(jkey)
 {
 	image_index = 0;
 	sprite_index = spr_player_jump
+	
 }
 
 if (ground) {
@@ -89,7 +131,7 @@ if (ground) {
 
 #region Andando
 
-if(rkey or lkey)
+if(keyboard_check(vk_right) || keyboard_check(ord("D")) or keyboard_check(vk_left) || keyboard_check(ord("A")))
 {
 	sprite_index = spr_player_walking
 }
@@ -116,8 +158,8 @@ if ((!rkey && !lkey) || (rkey && lkey)){
 
 }
 
-if (place_meeting(x+hspd, y, obj_Solid)){
-    while (!place_meeting(x+sign(hspd), y, obj_Solid)){
+if (place_meeting(x+hspd, y, obj_solid)){
+    while (!place_meeting(x+sign(hspd), y, obj_solid)){
         x += sign(hspd);
     }
     hspd = 0;
@@ -125,8 +167,8 @@ if (place_meeting(x+hspd, y, obj_Solid)){
 
 x += hspd;
 
-if (place_meeting(x, y+vspd, obj_Solid)){
-    while (!place_meeting(x, y+sign(vspd), obj_Solid)){
+if (place_meeting(x, y+vspd, obj_solid)){
+    while (!place_meeting(x, y+sign(vspd), obj_solid)){
         y += sign(vspd)
     }
     vspd = 0;
@@ -148,3 +190,32 @@ y += vspd;
 	
 #endregion
 
+if keyboard_check(ord("Z"))
+{
+	show_debug_message(global.damage)
+}
+
+#region
+
+//Checando se tem colisão com uma porta
+    var _porta = instance_place(x, y, obj_porta);
+    
+	if(keyboard_check(ord("E")))
+	{
+    //Se houve colisão com a porta eu faço alguma coisa
+    if (_porta)
+    {
+        if (chaves > 0 && _porta.estado == "fechada")
+        {
+            //Vou destruir a porta
+            //instance_destroy(_porta);
+            _porta.estado = "abrindo";
+            //Ele vai avisar a porta que ela mudou de estado
+            
+            //Perco a minha chave
+            chaves--;
+        }
+    }
+	}
+
+#endregion

@@ -1,0 +1,1 @@
+global.damage = 10
