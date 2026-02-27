@@ -1,9 +1,10 @@
 #region Atalho de var
 
-var rkey = keyboard_check(vk_right) || keyboard_check(ord("D"));
-var lkey = keyboard_check(vk_left) || keyboard_check(ord("A"));
-var jkey = keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("W"));
+var rkey = keyboard_check(vk_right) or keyboard_check(ord("D"));
+var lkey = keyboard_check(vk_left) or keyboard_check(ord("A"));
+var jkey = keyboard_check_pressed(vk_space) or keyboard_check_pressed(ord("W"));
 var akey = mouse_check_button(mb_left)
+var ckey = keyboard_check(vk_control)
 
 var ground = place_meeting(x, y + 1, obj_solid)
 
@@ -18,10 +19,19 @@ if(keyboard_check(ord("E")))
 {
 	if(place_meeting(x,y,obj_chest))
 	{
-		chave++;
+		global.chave++;
 		show_message("+1 Chave")
 	}
 	instance_destroy(obj_chest)
+}
+
+if (keyboard_check_pressed(ord("E")))
+{
+    if (place_meeting(x, y, obj_porta) and obj_porta.estado == "fechada" and global.chave >= 0)
+    {
+        obj_porta.estado = "abrindo"; // inicia animação de abrir
+		instance_destroy(inst_7A5C8B18)
+    }
 }
 
 #endregion
@@ -129,14 +139,22 @@ if (ground) {
 
 #endregion
 
-#region Andando
+#region Andando e Correndo
 
-if(keyboard_check(vk_right) || keyboard_check(ord("D")) or keyboard_check(vk_left) || keyboard_check(ord("A")))
+if(keyboard_check(vk_control) and (keyboard_check(vk_right) or keyboard_check(ord("D"))) or keyboard_check(vk_control) and (keyboard_check(vk_left) or keyboard_check(ord("A"))))
+{
+	sprite_index = spr_player_run
+}else if(keyboard_check(vk_right) or keyboard_check(ord("D")) or keyboard_check(vk_left) or keyboard_check(ord("A")))
 {
 	sprite_index = spr_player_walking
 }
 
-if (rkey){
+if (rkey and ckey){
+    
+    hspd = spd_r;
+    dir = 1;
+
+}else if (rkey){
     
     hspd = spd;
     dir = 1;
@@ -144,7 +162,12 @@ if (rkey){
 }
 
 
-if (lkey){
+if (lkey and ckey){
+
+    hspd = -3;
+    dir =  -1;
+    
+}if (lkey){
 
     hspd = -spd;
     dir =  -1;
@@ -152,7 +175,11 @@ if (lkey){
 }
 
 
-if ((!rkey && !lkey) || (rkey && lkey)){
+if ((!rkey and !lkey and ckey) or (rkey and lkey and ckey)){
+
+    hspd = 0;
+
+}else if ((!rkey && !lkey) or (rkey && lkey)){
 
     hspd = 0;
 
@@ -195,27 +222,17 @@ if keyboard_check(ord("Z"))
 	show_debug_message(global.damage)
 }
 
-#region
 
-//Checando se tem colisão com uma porta
-    var _porta = instance_place(x, y, obj_porta);
-    
-	if(keyboard_check(ord("E")))
-	{
-    //Se houve colisão com a porta eu faço alguma coisa
-    if (_porta)
-    {
-        if (chaves > 0 && _porta.estado == "fechada")
-        {
-            //Vou destruir a porta
-            //instance_destroy(_porta);
-            _porta.estado = "abrindo";
-            //Ele vai avisar a porta que ela mudou de estado
-            
-            //Perco a minha chave
-            chaves--;
-        }
-    }
-	}
-
-#endregion
+if(room == Room1_Child_1)
+{
+	show_message("Mundo Corrompido")show_message("Mundo Corrompido")
+	show_message("Mundo Corrompido")
+	show_message("Mundo Corrompido")
+	show_message("Mundo Corrompido")
+	show_message("Mundo Corrompido")
+	show_message("Mundo Corrompido")
+	show_message("Mundo Corrompido")
+	show_message("Mundo Corrompido")
+	show_message("Mundo Corrompido")
+	show_message("Mundo Corrompido")
+}

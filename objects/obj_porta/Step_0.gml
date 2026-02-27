@@ -1,3 +1,5 @@
-/// @description Inserir descrição aqui
-// Você pode escrever seu código neste editor
-maquina_estados();
+if (estado == "abrindo")
+{
+    y -= velocidade; // move a porta para cima
+    
+}

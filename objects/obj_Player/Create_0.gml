@@ -1,4 +1,5 @@
 spd = 2; 
+spd_r = 3;
 jspd = 6; 
 hspd = 0; 
 vspd = 0; 
@@ -12,7 +13,6 @@ meio_do_pulo = false
 
 inventory = ds_list_create();
 
-chave = 0;
 
 
 
